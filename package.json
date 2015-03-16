@@ -1,0 +1,36 @@
+{
+  "name": "lambduh-put-s3-object",
+  "version": "1.0.0",
+  "description": "Upload any object to S3",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lambduh/lambduh-put-s3-object.git"
+  },
+  "keywords": [
+    "lambda",
+    "put",
+    "s3",
+    "upload",
+    "bucket",
+    "key"
+  ],
+  "author": "Russell Matney",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lambduh/lambduh-put-s3-object/issues"
+  },
+  "homepage": "https://github.com/lambduh/lambduh-put-s3-object",
+  "dependencies": {
+    "q": "^1.2.0"
+  },
+  "devDependencies": {
+    "chai": "^2.1.2",
+    "gulp": "^3.8.11",
+    "gulp-mocha": "^2.0.0",
+    "mocha": "^2.2.1"
+  }
+}
