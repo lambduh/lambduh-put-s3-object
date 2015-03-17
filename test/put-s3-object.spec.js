@@ -41,6 +41,55 @@ describe('putS3Object', function() {
       })
     });
 
+    it('should require Key param', function(done) {
+      var options = {
+        dstBucket: "my-lil-red-bucket"
+      }
+      put()(options).then(function() {
+        done(new Error('Expected function to throw error'));
+      }, function(err) {
+        if (err) {
+          done();
+        } else {
+          done(new Error('Expected err object to exist'));
+        }
+      })
+    });
+
+    it('should require filepath param', function(done) {
+      var options = {
+        dstBucket: "my-lil-red-bucket",
+        dstKey: "my-red-lil-key.png"
+      }
+      put()(options).then(function() {
+        done(new Error('Expected function to throw error'));
+      }, function(err) {
+        if (err) {
+          done();
+        } else {
+          done(new Error('Expected err object to exist'));
+        }
+      })
+    });
+
+    //TODO: implement properly - mock AWS.S3 .upload() and .send()
+    xit('should resolve the options object when required params are included', function(done) {
+      var options = {
+        dstBucket: "my-lil-red-bucket",
+        dstKey: "my-red-lil-key.png",
+        filepath: "/tmp/my-red-lil-key.png",
+        key: 'val'
+      }
+      put()(options).then(function(opts) {
+        if (opts == options) {
+          done();
+        } else {
+          done(new Error('Expected resolved options to match inputted options'));
+        }
+      }, function() {
+        done(new Error('Expected function to pass'));
+      })
+    });
 
   });
 });
