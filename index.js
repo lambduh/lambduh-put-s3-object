@@ -13,17 +13,17 @@ module.exports = function() {
       def.reject(new Error("S3 Upload expected options.dstBucket to exist"));
     } else if (!options.dstKey) {
       def.reject(new Error("S3 Upload expected options.dstKey to exist"));
-    } else if (!options.filepath) {
-      def.reject(new Error("S3 Upload expected options.filepath to exist"));
+    } else if (!options.uploadFilepath) {
+      def.reject(new Error("S3 Upload expected options.uploadFilepath to exist"));
     } else {
 
       var params = {
         Bucket: options.dstBucket,
         Key: options.dstKey,
-        ContentType: mime.lookup(options.filepath)
+        ContentType: mime.lookup(options.uploadFilepath)
       }
 
-      var file = fs.createReadStream(options.filepath);
+      var file = fs.createReadStream(options.uploadFilepath);
       var S3 = new AWS.S3({params: params});
       S3.upload({Body: file})
         .on('httpUploadProgress', function(evt) {

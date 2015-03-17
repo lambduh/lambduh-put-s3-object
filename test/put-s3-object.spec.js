@@ -56,7 +56,7 @@ describe('putS3Object', function() {
       })
     });
 
-    it('should require filepath param', function(done) {
+    it('should require uploadFilepath param', function(done) {
       var options = {
         dstBucket: "my-lil-red-bucket",
         dstKey: "my-red-lil-key.png"
@@ -77,7 +77,7 @@ describe('putS3Object', function() {
       var options = {
         dstBucket: "my-lil-red-bucket",
         dstKey: "my-red-lil-key.png",
-        filepath: "/tmp/my-red-lil-key.png",
+        uploadFilepath: "/tmp/my-red-lil-key.png",
         key: 'val'
       }
       put()(options).then(function(opts) {
