@@ -16,7 +16,6 @@ describe('putS3Object', function() {
   });
 
   describe('validation', function() {
-
     it('should throw an error on null options input', function(done) {
       put()().then(function() {
         done(new Error('Expected function to throw error'));
@@ -71,25 +70,25 @@ describe('putS3Object', function() {
         }
       })
     });
-
-    //TODO: implement properly - mock AWS.S3 .upload() and .send()
-    xit('should resolve the options object when required params are included', function(done) {
-      var options = {
-        dstBucket: "my-lil-red-bucket",
-        dstKey: "my-red-lil-key.png",
-        uploadFilepath: "/tmp/my-red-lil-key.png",
-        key: 'val'
-      }
-      put()(options).then(function(opts) {
-        if (opts == options) {
-          done();
-        } else {
-          done(new Error('Expected resolved options to match inputted options'));
-        }
-      }, function() {
-        done(new Error('Expected function to pass'));
-      })
-    });
-
   });
+
+  //TODO: implement properly - mock AWS.S3 .upload() and .send()
+  xit('should resolve the options object when required params are included', function(done) {
+    var options = {
+      dstBucket: "my-lil-red-bucket",
+      dstKey: "my-red-lil-key.png",
+      uploadFilepath: "/tmp/my-red-lil-key.png",
+      key: 'val'
+    }
+    put()(options).then(function(opts) {
+      if (opts == options) {
+        done();
+      } else {
+        done(new Error('Expected resolved options to match inputted options'));
+      }
+    }, function() {
+      done(new Error('Expected function to pass'));
+    })
+  });
+
 });
