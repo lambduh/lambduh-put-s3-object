@@ -15,24 +15,23 @@ var upload = require('lambduh-put-s3-object');
 
 //your lambda function
 exports.handler = function(event, context) {
-  var promises = [];
-  
-  promises.push(function(options) {
-    options.dstBucket = "destination-bucket"
-    options.dstKey = "path/to/s3/upload/key.txt"
-    options.uploadFilepath = "/tmp/path/to/local/file.txt"
-    return upload()(options);
-  })
 
-  promises.reduce(Q.when, Q({}))
+  upload(null, {
+    dstBucket: "destination-bucket",
+    dstKey: "path/to/s3/upload/key.txt",
+    uploadFilepath: "/tmp/path/to/local/file.txt"
+  })
+  .then(function(result) {
+  	context.done()
+  }).fail(function(err) {
+  	context.done(err);
+  });
 }
 ```
 
 This module expects three fields on the passed `options` object: `.dstBucket`, `.dstKey`, and `.uploadFilepath`
 
-It will upload an object at the specified filepath to S3 at the specifed bucket and key. 
-
-NOTE: See the [general Lambduh README](https://github.com/lambduh/lambduh#usage---options-object-flow) for info on the `options` object flow. (In short, an `options` object is expected to flow through the full promise chain, and modules are expected to act on it or pass it on, or both).
+It will upload an object at the specified filepath to S3 at the specifed bucket and key.
 
 # Full disclosure
 

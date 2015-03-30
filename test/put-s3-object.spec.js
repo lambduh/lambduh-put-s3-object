@@ -7,17 +7,13 @@ describe('putS3Object', function() {
     expect(put).to.exist;
   });
 
-  it('should return a function', function() {
-    expect(put()).to.be.a('function');
-  })
-
-  it('should return a function that returns a promise', function() {
-    expect(put()().then).to.exist;
+  it('should return a promise', function() {
+    expect(put().then).to.exist;
   });
 
   describe('validation', function() {
     it('should throw an error on null options input', function(done) {
-      put()().then(function() {
+      put().then(function() {
         done(new Error('Expected function to throw error'));
       }, function(err) {
         if (err) {
@@ -29,7 +25,7 @@ describe('putS3Object', function() {
     });
 
     it('should require Bucket param', function(done) {
-      put()({}).then(function() {
+      put(null, {}).then(function() {
         done(new Error('Expected function to throw error'));
       }, function(err) {
         if (err) {
@@ -44,7 +40,7 @@ describe('putS3Object', function() {
       var options = {
         dstBucket: "my-lil-red-bucket"
       }
-      put()(options).then(function() {
+      put(null, options).then(function() {
         done(new Error('Expected function to throw error'));
       }, function(err) {
         if (err) {
@@ -60,7 +56,7 @@ describe('putS3Object', function() {
         dstBucket: "my-lil-red-bucket",
         dstKey: "my-red-lil-key.png"
       }
-      put()(options).then(function() {
+      put(null, options).then(function() {
         done(new Error('Expected function to throw error'));
       }, function(err) {
         if (err) {
@@ -80,7 +76,7 @@ describe('putS3Object', function() {
       uploadFilepath: "/tmp/my-red-lil-key.png",
       key: 'val'
     }
-    put()(options).then(function(opts) {
+    put(null, options).then(function(opts) {
       if (opts == options) {
         done();
       } else {
