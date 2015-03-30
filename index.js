@@ -39,7 +39,7 @@ module.exports = function(result, options) {
           def.reject(err);
         } else {
           console.log('successful upload');
-          def.resolve(options);
+          def.resolve(result);
         }
       });
 
