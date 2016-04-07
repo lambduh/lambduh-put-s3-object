@@ -22,10 +22,15 @@ module.exports = function(result, options) {
       result[key] = options[key];
     }
 
+    if(!options.ACL){
+      options.ACL = 'private';
+    }
+
     var params = {
       Bucket: options.dstBucket,
       Key: options.dstKey,
-      ContentType: mime.lookup(options.uploadFilepath)
+      ContentType: mime.lookup(options.uploadFilepath),
+      ACL: options.ACL
     }
 
     var file = fs.createReadStream(options.uploadFilepath);
