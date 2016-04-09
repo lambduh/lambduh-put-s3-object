@@ -29,7 +29,11 @@ module.exports = function(result, options) {
     }
 
     var file = fs.createReadStream(options.uploadFilepath);
-    var S3 = new AWS.S3({params: params});
+    if (options.region) {
+      var S3 = new AWS.S3({params: params, region: options.region});
+    } else {
+      var S3 = new AWS.S3({params: params});
+    }
     S3.upload({Body: file})
       .on('httpUploadProgress', function(evt) {
         console.log('Upload Progress: ' + (100 * evt.loaded / evt.total));
