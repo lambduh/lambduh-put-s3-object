@@ -46,10 +46,10 @@ options= {
       dstKey: "my-red-lil-key.png",
       uploadFilepath: "/tmp/my-red-lil-key.png",
       Metadata: {
-        language :'EN',
-        dialect:'us',
+        language: 'EN',
+        dialect: 'us',
         encoding: 'utf8',
-        client_class:'premium'
+        client_class: 'premium'
       }
 ```
 
