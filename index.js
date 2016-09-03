@@ -24,8 +24,13 @@ module.exports = function(result, options) {
     var params = {
       Bucket: options.dstBucket,
       Key: options.dstKey,
-      ContentType: mime.lookup(options.uploadFilepath)
+      ContentType: mime.lookup(options.uploadFilepath),
     };
+    if (options.Metadata) {
+      params["Metadata"] = options.Metadata
+    }
+    console.log(params);
+
 
     if (options.ACL) {
       params.ACL = options.ACL;
