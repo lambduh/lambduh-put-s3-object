@@ -1,6 +1,5 @@
 var expect = require('chai').expect;
 var testBucketName ='lambduh-upload-test-bucket';
-//var testBucketName ='my-lil-red-bucket';
 var put = require('../');
 
 describe('putS3Object', function() {
@@ -22,7 +21,7 @@ describe('putS3Object', function() {
         } else {
           done(new Error('Expected err object to exist'));
         }
-      })
+      });
     });
 
     it('should require Bucket param', function(done) {
@@ -34,13 +33,13 @@ describe('putS3Object', function() {
         } else {
           done(new Error('Expected err object to exist'));
         }
-      })
+      });
     });
 
     it('should require Key param', function(done) {
       var options = {
         dstBucket: testBucketName
-      }
+      };
       put(null, options).then(function() {
         done(new Error('Expected function to throw error'));
       }, function(err) {
@@ -49,14 +48,14 @@ describe('putS3Object', function() {
         } else {
           done(new Error('Expected err object to exist'));
         }
-      })
+      });
     });
 
     it('should require uploadFilepath param', function(done) {
       var options = {
         dstBucket: testBucketName,
         dstKey: "my-red-lil-key.png"
-      }
+      };
       put(null, options).then(function() {
         done(new Error('Expected function to throw error'));
       }, function(err) {
@@ -65,7 +64,7 @@ describe('putS3Object', function() {
         } else {
           done(new Error('Expected err object to exist'));
         }
-      })
+      });
     });
   });
 
@@ -76,7 +75,7 @@ describe('putS3Object', function() {
       dstKey: "my-red-lil-key.png",
       uploadFilepath: "/tmp/my-red-lil-key.png",
       key: 'val'
-    }
+    };
     put(null, options).then(function(opts) {
       if (opts == options) {
         done();
@@ -85,54 +84,45 @@ describe('putS3Object', function() {
       }
     }, function() {
       done(new Error('Expected function to pass'));
-    })
+    });
   });
 
-  it('should resolve Metadat objects when Metadat is included', function(done) {
+  it('should resolve Metadata objects when Metadata is included', function(done) {
     var metadata = {
-      language :'EN',
-      dialect:'us',
+      language: 'EN',
+      dialect: 'us',
       encoding: 'utf8',
-      client_class:'premium'
-    }
+      client_class: 'premium'
+    };
     var options = {
       dstBucket: testBucketName,
       dstKey: "my-red-lil-key.png",
       uploadFilepath: "/tmp/my-red-lil-key.png",
-      Metadata:metadata,
-
-    }
+      Metadata: metadata
+    };
     put(null, options).then(function(opts) {
-
-
-      if (opts.Metadata===metadata) {
+      if (opts.Metadata === metadata) {
         done();
       } else {
         done(new Error('Expected resolved options metadata to match inputted metadata'));
       }
-    }, function(opts) {
-      console.log(opts);
+    }, function() {
       done(new Error('Expected function to pass but it did not'));
-    })
-
+    });
   });
+
   //Disabled by default since when you upload it it runs over the previous one and is hard to check
   xit('should not send MetaData if no MetaData was provided', function(done) {
     var options = {
       dstBucket: testBucketName,
       dstKey: "my-red-lil-key.png",
-      uploadFilepath: "/tmp/my-red-lil-key.png",
-
-    }
-    put(null, options).then(function(opts) {
-      if (true ) {
-        done();
-      } else {
-        done(new Error('Expected metadata to be undefined in resolved opts if no metadata was passed'));
-      }
+      uploadFilepath: "/tmp/my-red-lil-key.png"
+    };
+    put(null, options).then(function() {
+      done();
     }, function() {
       done(new Error('Expected function to pass'));
-    })
+    });
 
   });
-  });
+});

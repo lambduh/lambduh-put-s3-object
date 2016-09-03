@@ -24,13 +24,12 @@ module.exports = function(result, options) {
     var params = {
       Bucket: options.dstBucket,
       Key: options.dstKey,
-      ContentType: mime.lookup(options.uploadFilepath),
+      ContentType: mime.lookup(options.uploadFilepath)
     };
-    if (options.Metadata) {
-      params["Metadata"] = options.Metadata
-    }
-    console.log(params);
 
+    if (options.Metadata) {
+      params["Metadata"] = options.Metadata;
+    }
 
     if (options.ACL) {
       params.ACL = options.ACL;
@@ -53,7 +52,7 @@ module.exports = function(result, options) {
         if (err) {
           def.reject(err);
         } else {
-          console.log('successful upload');
+          console.log('Successfully uploaded: ', options.uploadFilepath);
           def.resolve(result);
         }
       });
